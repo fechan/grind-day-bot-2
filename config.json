@@ -1,0 +1,8 @@
+{
+    "prefix": "!gdb ",
+    "token": "INSERT TOKEN HERE",
+    "status": {
+        "gameType": "LISTENING",
+        "gameName": "mysterious voices"
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "grind-day-bot-2",
+  "version": "1.0.0",
+  "description": "Discord bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fechan",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^4.8.2",
+    "discord.js": "^11.5.1"
+  }
+}
