@@ -1,0 +1,11 @@
+{
+  "name": "Grind Day Bot 2",
+  "description": "A Discord bot for use with my friends",
+  "keywords": [
+    "small",
+    "sharp",
+    "tool"
+  ],
+  "addons": [],
+  "env": {}
+}
