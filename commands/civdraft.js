@@ -7,8 +7,8 @@ module.exports = {
     name: 'civdraft',
     aliases: ['cdraft', 'civ'],
     usage: '<version> OPTIONAL: (number)',
-	description: 'Randomly pick Civ 5 or 6 civs. Supported <version>s are: 5, 6, 5vanilla, 6vanilla',
-	execute(message, args) {
+    description: 'Randomly pick Civ 5 or 6 civs. Supported <version>s are: 5, 6, 5vanilla, 6vanilla',
+    execute(message, args) {
         let chosen = [];
         let amount = 10;
         let version = args[0];
@@ -44,5 +44,5 @@ module.exports = {
             reply += `${civ['nationName']} - ${civ['leaderName']} (${wikiLink})\n`
         }
         message.reply(reply, {split:true});
-	},
+    },
 };
