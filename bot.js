@@ -1,10 +1,12 @@
 const fs = require('fs');
 const Discord = require('discord.js');
+const glob = require('glob');
+const path = require('path');
 const config = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = glob.sync('./commands/**/*.js');
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
     console.log("Loaded " + command.name + " command");
