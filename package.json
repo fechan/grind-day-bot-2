@@ -9,8 +9,8 @@
   "author": "fechan",
   "license": "ISC",
   "dependencies": {
-    "csv-parse": "^4.8.2",
-    "discord.js": "^11.5.1",
+    "csv-parse": "^4.8.8",
+    "discord.js": "^11.6.3",
     "glob": "^7.1.6"
   }
 }
