@@ -1,6 +1,7 @@
 {
     "prefix": "!gdb ",
     "token": "INSERT TOKEN HERE",
+    "testToken": "INSERT ALTERNATE TESTING/DEBUG TOKEN HERE",
     "status": {
         "gameType": "LISTENING",
         "gameName": "mysterious voices"

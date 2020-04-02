@@ -55,4 +55,9 @@ client.on('message', message => {
     }
 });
 
-client.login(config.token);
+if (process.argv.includes("--debug")) {
+    console.log("WARNING: Bot is running with --debug on and is using the test token!");
+    client.login(config.testToken);
+} else {
+    client.login(config.token);
+}
