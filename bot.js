@@ -23,9 +23,10 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-    if (!message.content.startsWith(config.prefix) || message.author.bot) return;
+    let prefix = process.argv.includes('--debug') ? config.testPrefix : config.prefix;
+    if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const args = message.content.slice(config.prefix.length).split(/ +/);
+    const args = message.content.slice(prefix.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
     //Find command or its alias
@@ -41,7 +42,7 @@ client.on('message', message => {
     if (command.args && !args.length) {
         let reply = `incorrect number of arguments. `;
         if (command.usage) {
-            reply += `Usage: \`\`\`${config.prefix}${command.name} ${command.usage}\`\`\``;
+            reply += `Usage: \`\`\`${prefix}${command.name} ${command.usage}\`\`\``;
         }
         return message.reply(reply);
     }
