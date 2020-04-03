@@ -12,14 +12,17 @@ module.exports = {
             message.reply("Game names must start with `game_`!");
             return;
         }
-        if (message.guild.roles.find(role => role.name === name)) {
+        if (message.guild.roles.cache.find(role => role.name === name)) {
             message.reply(`A game with name ${name} already exists!`);
             return;
         }
-        message.guild.createRole({
-            name: name,
-            mentionable: true
-        }, `Creating game ${name}`)
+        message.guild.roles.create({
+            data: {
+                name: name,
+                mentionable: true
+            },
+            reason: `Creating game ${name}`
+        })
             .then(value => message.reply(`Successfully created game ${name}.`),
                 reason => message.reply(`Unable to create game ${name}; check that the bot has adequate permissions.`));
     },

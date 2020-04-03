@@ -12,12 +12,12 @@ module.exports = {
             message.reply("Game names must start with `game_`!");
             return;
         }
-        let game = message.member.roles.find(role => role.name === name);
+        let game = message.member.roles.cache.find(role => role.name === name);
         if (game === null) {
             message.reply(`You're not in a game called ${name}!`);
             return;
         }
-        message.member.removeRole(game, `Removing game role role ${name} from ${message.member.name}`)
+        message.member.roles.remove(game, `Removing game role ${name} from ${message.member.nickname}`)
             .then(value => message.reply(`Successfully removed you from game ${name}.`),
                 reason => message.reply(`Unable to remove you from game ${name}; check that the bot has adequate permissions.`))
             .then(result => {

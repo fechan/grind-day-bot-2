@@ -2,7 +2,7 @@ module.exports = {
     name: 'findgames',
     description: 'Finds games where everyone is online.',
     execute(message, args) {
-        let gameRoles = message.guild.roles.filter(role => role.name.startsWith('game_'));
+        let gameRoles = message.guild.roles.cache.filter(role => role.name.startsWith('game_'));
         let onlineGames = [];
         for (let [roleId, role] of gameRoles) {
             let allOnline = true;

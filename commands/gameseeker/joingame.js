@@ -13,12 +13,12 @@ module.exports = {
             message.reply("Game name must start with `game_`!");
             return;
         }
-        let game = message.guild.roles.find(role => role.name === name);
+        let game = message.guild.roles.cache.find(role => role.name === name);
         if (game === null) {
             message.reply(`No game name exists called ${name}!`);
             return;
         }
-        message.member.addRole(game)
+        message.member.roles.add(game, `Adding ${message.member.nickname} to game ${game.name}`)
             .then(value => message.reply(`Successfully added you to game ${name}.`),
                 reason => message.reply(`Error adding role ${name}; check that the bot has adequate permissions.`)
             );
