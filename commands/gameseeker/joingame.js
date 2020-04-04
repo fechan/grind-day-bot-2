@@ -14,7 +14,7 @@ module.exports = {
             return;
         }
         let game = message.guild.roles.cache.find(role => role.name === name);
-        if (game === null) {
+        if (game === undefined) {
             message.reply(`No game name exists called ${name}!`);
             return;
         }

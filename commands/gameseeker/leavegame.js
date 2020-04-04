@@ -13,7 +13,7 @@ module.exports = {
             return;
         }
         let game = message.member.roles.cache.find(role => role.name === name);
-        if (game === null) {
+        if (game === undefined) {
             message.reply(`You're not in a game called ${name}!`);
             return;
         }
