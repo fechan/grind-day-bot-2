@@ -16,7 +16,7 @@ client.once('ready', () => {
     console.log("Ready!");
     client.user.setPresence({
         status: 'online',
-        game: {
+        activity: {
             name: config.status.gameName,
             type: config.status.gameType
         }
