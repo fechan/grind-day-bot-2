@@ -10,6 +10,13 @@ for (const file of commandFiles) {
     console.log("Loaded " + command.name + " command");
     client.commands.set(command.name, command);
 }
+const listenerFiles = glob.sync('./eventlisteners/*.js');
+for (const file of listenerFiles) {
+    const listener = require(file);
+    console.log("Loaded " + listener.name + " event listener");
+    client.on(listener.event, listener.callback);
+}
+
 
 client.once('ready', () => {
     console.log("Ready!");
