@@ -11,6 +11,7 @@ function getRandomInt(min, max) {
 module.exports = {
     name: 'roll',
     description: 'Rolls dice in standard AdX+B dice notation',
+    usage: '(A)dX(±B)',
     execute(message, args) {
         let regex = /^(\d+)?d(\d+)([+-]\d+)?$/;
         if (!regex.test(args[0])) {
