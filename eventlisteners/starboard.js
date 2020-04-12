@@ -29,6 +29,7 @@ function registerStar(messageReaction, user) {
 
         if (message.author.id === user.id && !config.starboardCanStarOwnMessage) {
             user.send(`You can't ${emoji} your own message!`);
+            messageReaction.users.remove(user);
         } else if (message.id in starred) { //if message already posted to starboard
             let starboardEntry = starred[message.id];
             starboardEntry.edit(`${emoji} **${messageReaction.count}** ${message.channel} ID: ${message.id}`);
