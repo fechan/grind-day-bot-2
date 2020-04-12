@@ -6,5 +6,10 @@
     "status": {
         "gameType": "LISTENING",
         "gameName": "mysterious voices"
-    }
+    },
+    "starboardName": "starboard",
+    "starboardEmoji": "⭐",
+    "starboardThreshold": 3,
+    "starboardTimeoutMs": 3600000,
+    "starboardCanStarOwnMessage": false
 }
