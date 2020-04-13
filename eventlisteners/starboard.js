@@ -23,18 +23,17 @@ function getStarboard(guild) {
 function registerStar(messageReaction, user) {
     let message = messageReaction.message;
     let starboard = getStarboard(message.guild);
-    if (starboard) { //if starboard exists
+    let emoji = messageReaction.emoji.name;
+    
+    if (starboard && emoji === config.starboardEmoji) {
         let reactTime = new Date();
-        let emoji = messageReaction.emoji.name;
-
         if (message.author.id === user.id && !config.starboardCanStarOwnMessage) {
             user.send(`You can't ${emoji} your own message!`);
             messageReaction.users.remove(user);
         } else if (message.id in starred) { //if message already posted to starboard
             let starboardEntry = starred[message.id];
             starboardEntry.edit(`${emoji} **${messageReaction.count}** ${message.channel} ID: ${message.id}`);
-        } else if (emoji === config.starboardEmoji &&
-            messageReaction.count === config.starboardThreshold &&
+        } else if (messageReaction.count === config.starboardThreshold &&
             reactTime - message.createdAt <= config.starboardTimeoutMs &&
             message.channel !== starboard) { //don't track messages inside the starboard
             let starboardEmbed = new Discord.MessageEmbed()
