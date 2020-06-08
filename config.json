@@ -11,5 +11,7 @@
     "starboardEmoji": "⭐",
     "starboardThreshold": 3,
     "starboardTimeoutMs": 3600000,
-    "starboardCanStarOwnMessage": false
+    "starboardCanStarOwnMessage": false,
+    "jpTokensEmoji": "🗾",
+    "jpTokensExclude": ["は", "が", "と", "か", "の", "を", "も", "に", "へ", "で"]
 }
