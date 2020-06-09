@@ -10,13 +10,15 @@ async function unpackResponses(responses) {
     let definitions = [];
     for (let response of responses) {
         let data = await response.json();
-        data = data['data'][0];
-        let word = {
-            lemma: data['slug'],
-            reading: data['japanese'][0]['reading'],
-            meaning: data['senses'][0]['english_definitions']
-        };
-        definitions.push(word);
+        if (data.data.length > 0) { // only include words with definitions
+            data = data['data'][0];
+            let word = {
+                lemma: data['slug'],
+                reading: data['japanese'][0]['reading'],
+                meaning: data['senses'][0]['english_definitions']
+            };
+            definitions.push(word);
+        }
     }
     return definitions;
 }
