@@ -35,27 +35,37 @@ module.exports = {
     usage: '<series abbreviation> <SEASON>x<EPISODE>',
     execute(message, args) {
         let series = args[0].toUpperCase();
-        let episode = args[1];
+        let episode;
+
+        let episodeMatches;
+        let title;
         if (!(series in trekData)) {
             message.reply("Invalid Star Trek series: " + args[0]);
-        } else {
+        } else if (/\d+x\d+/.test(episode)) { //if episode is SEASONxEPISODE format
+            episode = args[1];
             let episodeNumber = episode.split('x')[1];
             let seasonNumber = episode.split('x')[0];
             if (episodeNumber.length === 1) {
                 episodeNumber = '0' + episodeNumber;
             }
-            let episodeMatches = trekData[series].filter(releasedEpisode => {
+            episodeMatches = trekData[series].filter(releasedEpisode => {
                 let season = releasedEpisode[0].split('x')[0];
                 let number = releasedEpisode[0].split('x')[1];
                 return season === seasonNumber && number.includes(episodeNumber)
             });
-            if (episodeMatches.length === 0) {
-                message.reply(`Couldn't find ${series} episode ${episode}!`);
-                return;
-            }
-            let title = episodeMatches[0][1];
-            let memAlpha = `https://memory-alpha.fandom.com/wiki/${title.replace(/ /g, '_')}_(episode)`
-            message.reply(`${series} ${episode} is ${title} \n${memAlpha}`);
+        } else {
+            episode = args.slice(1).join(" ");
+            episodeMatches = trekData[series].filter(releasedEpisode => {
+                return releasedEpisode[1].toUpperCase() === episode.toUpperCase();
+            });
         }
+        
+        if (episodeMatches.length === 0) {
+            message.reply(`Couldn't find ${series} episode ${episode}!`);
+            return;
+        }
+        title = episodeMatches[0][1];
+        let memAlpha = `https://memory-alpha.fandom.com/wiki/${title.replace(/ /g, '_')}_(episode)`
+        message.reply(`${series} ${episode} is ${title} \n${memAlpha}`);
     },
 };
