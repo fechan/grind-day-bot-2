@@ -41,7 +41,8 @@ module.exports = {
         let title;
         if (!(series in trekData)) {
             message.reply("Invalid Star Trek series: " + args[0]);
-        } else if (/\d+x\d+/.test(episode)) { //if episode is SEASONxEPISODE format
+            return;
+        } else if (/\d+x\d+/.test(args[1])) { //if episode is SEASONxEPISODE format
             episode = args[1];
             let episodeNumber = episode.split('x')[1];
             let seasonNumber = episode.split('x')[0];
