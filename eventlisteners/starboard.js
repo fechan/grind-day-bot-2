@@ -30,11 +30,14 @@ function registerStar(messageReaction, user) {
         if (message.author.id === user.id && !config.starboardCanStarOwnMessage) {
             user.send(`You can't ${emoji} your own message!`);
             messageReaction.users.remove(user);
+        } else if (reactTime - message.createdAt >= config.starboardTimeoutMs) {
+            let response = `Too much time has passed since the message was posted to ${emoji} this message! ` +
+                `Your ${emoji} will remain but the message will not be added to ${starboard}.`;
+            user.send(response);
         } else if (message.id in starred) { //if message already posted to starboard
             let starboardEntry = starred[message.id];
             starboardEntry.edit(`${emoji} **${messageReaction.count}** ${message.channel} ID: ${message.id}`);
         } else if (messageReaction.count === config.starboardThreshold &&
-            reactTime - message.createdAt <= config.starboardTimeoutMs &&
             message.channel !== starboard) { //don't track messages inside the starboard
             let starboardEmbed = new Discord.MessageEmbed()
                 .setAuthor(message.member.displayName, message.author.avatarURL())
