@@ -9,16 +9,13 @@ module.exports = {
         } else {
             name = args.join(' ');
         }
-        if (!name.startsWith('game_')) {
-            message.reply("Game name must start with `game_`!");
-            return;
-        }
+        if (!name.startsWith('game_')) name = "game_" + name;
         let game = message.guild.roles.cache.find(role => role.name === name);
         if (game === undefined) {
             message.reply(`No game name exists called ${name}!`);
             return;
         }
-        message.member.roles.add(game, `Adding ${message.member.nickname} to game ${game.name}`)
+        message.member.roles.add(game, `Adding ${message.member.nickname} to ${game.name}`)
             .then(value => message.reply(`Successfully added you to game ${name}.`),
                 reason => message.reply(`Error adding role ${name}; check that the bot has adequate permissions.`)
             );

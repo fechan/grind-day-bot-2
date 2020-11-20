@@ -1,3 +1,5 @@
+const { prefix } = require('../../config.json');
+
 module.exports = {
     name: 'creategame',
     description: 'Creates a game with a given game name.',
@@ -8,10 +10,7 @@ module.exports = {
             return;
         }
         let name = args.join(' ');
-        if (!name.startsWith('game_')) {
-            message.reply("Game names must start with `game_`!");
-            return;
-        }
+        if (!name.startsWith('game_')) name = "game_" + name;
         if (message.guild.roles.cache.find(role => role.name === name)) {
             message.reply(`A game with name ${name} already exists!`);
             return;
@@ -23,7 +22,7 @@ module.exports = {
             },
             reason: `Creating game ${name}`
         })
-            .then(value => message.reply(`Successfully created game ${name}.`),
-                reason => message.reply(`Unable to create game ${name}; check that the bot has adequate permissions.`));
+            .then(role => message.reply(`Successfully created ${role}. Type \`\`\`${prefix}joingame ${name}\`\`\` to join the game!`),
+                reason => message.reply(`Unable to create ${name}; check that the bot has adequate permissions.`));
     },
 };
