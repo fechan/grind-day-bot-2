@@ -1,7 +1,20 @@
-module.exports = {
-    name: 'findgames',
-    description: 'Finds games where everyone is online.',
-    execute(message, args) {
+const Commando = require('discord.js-commando')
+
+module.exports = class FingamesCommand extends Commando.Command {
+    static command = true;
+    static name = "findgames";
+    static group = "gameseeker";
+
+    constructor(client) {
+        super(client, {
+            name: FingamesCommand.name,
+            group: FingamesCommand.group,
+            memberName: FingamesCommand.name,
+            description: 'Finds games where everyone is online.'
+        });
+    }
+
+    async run(message, args) {
         let gameRoles = message.guild.roles.cache.filter(role => role.name.startsWith('game_'));
         let onlineGames = [];
         for (let [roleId, role] of gameRoles) {
@@ -30,5 +43,5 @@ module.exports = {
             reply = "No games found where everyone is online."
         }
         message.reply(reply);
-    },
+    }
 };

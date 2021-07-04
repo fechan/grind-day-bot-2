@@ -1,13 +1,29 @@
-module.exports = {
-    name: 'leavegame',
-    description: 'Leave a game with a given name.',
-    usage: '<game_name>',
-    execute(message, args) {
-        if (args.length === 0) {
-            message.reply("You didn't specify a game name!");
-            return;
-        }
-        let name = args.join(' ');
+const Commando = require('discord.js-commando')
+
+module.exports = class LeavegameCommand extends Commando.Command {
+    static command = true;
+    static name = "leavegame";
+    static group = "gameseeker";
+
+    constructor(client) {
+        super(client, {
+            name: LeavegameCommand.name,
+            group: LeavegameCommand.group,
+            memberName: LeavegameCommand.name,
+            description: 'leave a game with a given game name.',
+            args: [
+                {
+                    key: "game_name",
+                    type: "string",
+                    infinite: true,
+                    prompt: "What's the name of the game you want to leave?"
+                }
+            ]
+        });
+    }
+
+    async run(message, args) {
+        let name = args["game_name"].join(' ');
         if (!name.startsWith('game_')) name = "game_" + name;
         let game = message.member.roles.cache.find(role => role.name === name);
         if (game === undefined) {
@@ -23,5 +39,5 @@ module.exports = {
                     game.delete(`Deleted game role ${name} because it has no members left.`);
                 }
             });
-    },
+    }
 };

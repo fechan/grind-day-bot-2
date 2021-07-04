@@ -11,7 +11,9 @@
   "dependencies": {
     "csv-parse": "^4.8.8",
     "discord.js": "^12.1.1",
+    "discord.js-commando": "^0.12.3",
     "glob": "^7.1.6",
+    "jsdom": "^16.6.0",
     "tiny-segmenter": "^0.2.0"
   }
 }

@@ -1,0 +1,20 @@
+{
+    "configName": "Grind Day Bot 2 Default Bot Config",
+    "ownerID": "OVERRIDE THIS WITH YOUR DISCORD USER ID",
+    "prefix": "!gdb ",
+    "testPrefix": "~gdb ",
+    "token": "OVERRIDE THIS WITH YOUR BOT TOKEN",
+    "testToken": "OVERRIDE THIS WITH YOUR ALTERNATE TESTING/DEBUG TOKEN",
+    "status": {
+        "gameType": "LISTENING",
+        "gameName": "mysterious voices"
+    },
+    "announcementsChannel": "announcements",
+    "starboardName": "starboard",
+    "starboardEmoji": "⭐",
+    "starboardThreshold": 3,
+    "starboardTimeoutMs": 3600000,
+    "starboardCanStarOwnMessage": false,
+    "jpTokensEmoji": "🗾",
+    "jpTokensExclude": ["は", "が", "と", "か", "の", "を", "も", "に", "へ", "で"]
+}

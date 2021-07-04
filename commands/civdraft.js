@@ -1,17 +1,40 @@
+const Commando = require('discord.js-commando');
 const civ5Data = require('../data/civdata/civs.5.json');
 const civ6Data = require('../data/civdata/civs.6.json');
 const civ5List = civ5Data['civilizations'];
 const civ6List = civ6Data['civilizations'];
 
-module.exports = {
-    name: 'civdraft',
-    aliases: ['cdraft', 'civ'],
-    usage: '<version> OPTIONAL: (number)',
-    description: 'Randomly pick Civ 5 or 6 civs. Supported <version>s are: 5, 6, 5vanilla, 6vanilla',
-    execute(message, args) {
+module.exports = class CivdraftCommand extends Commando.Command {
+    static command = true;
+    static name = "civdraft";
+    static group = "misc";
+    constructor(client) {
+        super(client, {
+            name: CivdraftCommand.name,
+            aliases: ['cdraft', 'civ'],
+            group: CivdraftCommand.group,
+            memberName: CivdraftCommand.name,
+            description: 'Randomly pick Civ 5 or 6 civs. Supported <version>s are: 5, 6, 5vanilla, 6vanilla',
+            args: [
+                {
+                    key: "version",
+                    type: "string",
+                    prompt: "What version of Civ do you want to draft from? (5, 6, 5vanilla, 6vanilla)"
+                },
+                {
+                    key: "number",
+                    type: "integer",
+                    default: "10",
+                    prompt: "How many civs do you want to draft?"
+                }
+            ]
+        });
+    }
+
+    async run(message, args) {
         let chosen = [];
         let amount = 10;
-        let version = args[0];
+        let version = args["version"];
         let allowedVersions = ['5', '6', '5vanilla', '6vanilla'];
         let civList;
         if (!allowedVersions.includes(version)) {
@@ -25,8 +48,8 @@ module.exports = {
         if (version.includes('vanilla')) {
             civList = civList.filter(civ => civ.expansion.includes('Vanilla'));
         }
-        if (args[1]) {
-            amount = parseInt(args[1]);
+        if (args["number"]) {
+            amount = parseInt(args["number"]);
             if (amount > civList.length) {
                 message.reply(`There aren't even that many civs in Civ ${version}!`);
                 return;
@@ -44,5 +67,5 @@ module.exports = {
             reply += `${civ['nationName']} - ${civ['leaderName']} (${wikiLink})\n`
         }
         message.reply(reply, {split:true});
-    },
+    }
 };

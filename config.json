@@ -1,17 +1,5 @@
-{
-    "prefix": "!gdb ",
-    "testPrefix": "~gdb ",
-    "token": "INSERT TOKEN HERE",
-    "testToken": "INSERT ALTERNATE TESTING/DEBUG TOKEN HERE",
-    "status": {
-        "gameType": "LISTENING",
-        "gameName": "mysterious voices"
-    },
-    "starboardName": "starboard",
-    "starboardEmoji": "⭐",
-    "starboardThreshold": 3,
-    "starboardTimeoutMs": 3600000,
-    "starboardCanStarOwnMessage": false,
-    "jpTokensEmoji": "🗾",
-    "jpTokensExclude": ["は", "が", "と", "か", "の", "を", "も", "に", "へ", "で"]
-}
+[
+    {
+        "_comment": "Define per-bot config overrides here. The root array can have multiple bot configs, each with their own overrides."
+    }
+]

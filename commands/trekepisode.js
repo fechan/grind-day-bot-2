@@ -1,3 +1,4 @@
+const Commando = require('discord.js-commando')
 const fs = require('fs');
 const parse = require('csv-parse');
 
@@ -27,23 +28,40 @@ for (const series of seriesDirs) {
     }
 }
 
-module.exports = {
-    name: 'trekepisode',
-    aliases: ['st', 'trek'],
-    description: 'Fetch an episode of Star Trek by show and episode reference. (e.g. DS9 6x09)',
-    args: true,
-    usage: '<series abbreviation> <SEASON>x<EPISODE>',
-    execute(message, args) {
-        let series = args[0].toUpperCase();
+module.exports = class TrekepisodeCommand extends Commando.Command {
+    static command = true;
+    static name = "trekepisode";
+    static group = "misc";
+
+    constructor(client) {
+        super(client, {
+            name: TrekepisodeCommand.name,
+            aliases: ['st', 'trek'],
+            group: TrekepisodeCommand.group,
+            memberName: TrekepisodeCommand.name,
+            description: 'Fetch an episode of Star Trek by show and episode reference. (e.g. DS9 6x09)',
+            args: [
+                {
+                    key: 'episode',
+                    type: 'string',
+                    infinite: true,
+                    prompt: 'Which episode do you want to find?'
+                }
+            ]
+        });
+    }
+
+    async run(message, args) {
+        let series = args['episode'][0].toUpperCase();
         let episode;
 
         let episodeMatches;
         let title;
         if (!(series in trekData)) {
-            message.reply("Invalid Star Trek series: " + args[0]);
+            message.reply("Invalid Star Trek series: " + args['episode'][0]);
             return;
-        } else if (/\d+x\d+/.test(args[1])) { //if episode is SEASONxEPISODE format
-            episode = args[1];
+        } else if (/\d+x\d+/.test(args['episode'][1])) { //if episode is SEASONxEPISODE format
+            episode = args['episode'][1];
             let episodeNumber = episode.split('x')[1];
             let seasonNumber = episode.split('x')[0];
             if (episodeNumber.length === 1) {
@@ -55,7 +73,7 @@ module.exports = {
                 return season === seasonNumber && number.includes(episodeNumber)
             });
         } else {
-            episode = args.slice(1).join(" ");
+            episode = args['episode'].slice(1).join(" ").replace("‘", "'");
             episodeMatches = trekData[series].filter(releasedEpisode => {
                 return releasedEpisode[1].toUpperCase() === episode.toUpperCase();
             });
@@ -68,5 +86,5 @@ module.exports = {
         title = episodeMatches[0][1];
         let memAlpha = `https://memory-alpha.fandom.com/wiki/${title.replace(/ /g, '_')}_(episode)`
         message.reply(`${series} ${episode} is ${title} \n${memAlpha}`);
-    },
+    }
 };
