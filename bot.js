@@ -68,21 +68,21 @@ for (let botConfig of config) {
             }
         });
         client.registry
-        .registerGroups(allowedGroups.map(groupName => [groupName, `${groupName} commands`]))
-        .registerDefaultTypes()
-        .registerDefaultGroups()
-        .registerDefaultCommands({
-            help: botConfig.enabledCommands.includes("help"),
-            prefix: botConfig.enabledCommands.includes("prefix"),
-            eval: botConfig.enabledCommands.includes("eval"),
-            ping: botConfig.enabledCommands.includes("ping"),
-            unknownCommand: botConfig.enabledCommands.includes("unknownCommand"),
-            commandState: botConfig.enabledCommands.includes("commandState")
-        })
-        .registerCommands(
-            allowedCommands,
-            true // ignore invalid commands?
-        );
+            .registerGroups(allowedGroups.map(groupName => [groupName, `${groupName} commands`]))
+            .registerDefaultTypes()
+            .registerDefaultGroups()
+            .registerDefaultCommands({
+                help: botConfig.enabledCommands.includes("help"),
+                prefix: botConfig.enabledCommands.includes("prefix"),
+                eval: botConfig.enabledCommands.includes("eval"),
+                ping: botConfig.enabledCommands.includes("ping"),
+                unknownCommand: botConfig.enabledCommands.includes("unknownCommand"),
+                commandState: botConfig.enabledCommands.includes("commandState")
+            })
+            .registerCommands(
+                allowedCommands,
+                true // ignore invalid commands?
+            );
         console.log(`${botConfig.configName}: loaded ${Array.from(client.registry.commands.keys()).join(", ")}`);
         console.log(`${botConfig.configName}: Ready!`);
     });
