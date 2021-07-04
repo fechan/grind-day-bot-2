@@ -16,5 +16,7 @@
     "starboardTimeoutMs": 3600000,
     "starboardCanStarOwnMessage": false,
     "jpTokensEmoji": "🗾",
-    "jpTokensExclude": ["は", "が", "と", "か", "の", "を", "も", "に", "へ", "で"]
+    "jpTokensExclude": ["は", "が", "と", "か", "の", "を", "も", "に", "へ", "で"],
+    "enabledCommands": ["help", "unknown-command"],
+    "enabledListeners": []
 }
