@@ -17,6 +17,6 @@
     "starboardCanStarOwnMessage": false,
     "jpTokensEmoji": "🗾",
     "jpTokensExclude": ["は", "が", "と", "か", "の", "を", "も", "に", "へ", "で"],
-    "enabledCommands": ["help", "unknown-command"],
+    "enabledCommands": ["help", "unknownCommand"],
     "enabledListeners": []
 }
