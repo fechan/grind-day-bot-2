@@ -19,7 +19,15 @@ module.exports = class JPTokensListener {
         Gets and prints definitions for tokens the target message
         This assumes the target message is in Japanese
     */
-    callback(messageReaction, user) {
+    async callback(messageReaction, user) {
+        if (messageReaction.partial) {
+            try {
+                await messageReaction.fetch();
+            } catch {
+                console.error(`User ${user.username}#${user.discriminator} (ID ${user.id}) attempted to tokenize Japanese but the following error occurred: ${error}`);
+                return;
+            }
+        }
         let message = messageReaction.message;
         let emoji = messageReaction.emoji.name;
         

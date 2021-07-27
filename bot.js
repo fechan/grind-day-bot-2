@@ -29,7 +29,8 @@ for (let botConfig of config) {
     botConfig = {...defaultConfig, ...botConfig}
     const client = new Commando.Client({
         owner: botConfig.ownerID,
-        commandPrefix: process.argv.includes('--debug') ? botConfig.testPrefix : botConfig.prefix
+        commandPrefix: process.argv.includes('--debug') ? botConfig.testPrefix : botConfig.prefix,
+        partials: ['MESSAGE', 'CHANNEL', 'REACTION']
     });
     
     client.setProvider(new StaticSettingProvider(botConfig));

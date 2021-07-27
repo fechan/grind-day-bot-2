@@ -27,7 +27,15 @@ module.exports = class StarboardListener {
     /*
         Processes a potential star
     */
-    callback(messageReaction, user) {
+    async callback(messageReaction, user) {
+        if (messageReaction.partial) {
+            try {
+                await messageReaction.fetch();
+            } catch {
+                console.error(`User ${user.username}#${user.discriminator} (ID ${user.id}) attempted to star a message but the following error occurred: ${error}`);
+                return;
+            }
+        }
         let message = messageReaction.message;
         let starboard = this.getStarboard(message.guild);
         let emoji = messageReaction.emoji.name;
